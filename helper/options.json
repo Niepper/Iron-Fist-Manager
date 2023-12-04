@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "name": "Display Active Mods",
+    "function": "displayEnabledMods"
+  },
+  {
+  "id": 2,
+  "name": "Display Inactive Mods",
+  "function": "displayDisabledMods"
+},{
+  "id": 3,
+  "name": "Enable Mods",
+  "function": "enableMods"
+},{
+  "id": 4,
+  "name": "Disable Mods",
+  "function": "disableMods"
+}
+
+
+]
