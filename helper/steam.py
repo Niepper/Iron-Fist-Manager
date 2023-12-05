@@ -27,9 +27,4 @@ def get_steam_game_location():
 GamePath = get_steam_game_location()
 ENABLED_MODS_PATH = GamePath + "/steamapps/common/TEKKEN 7/TekkenGame/Content/Paks/~mods/"
 CSV_PATH = GamePath + "/steamapps/common/TEKKEN 7/TekkenGame/Content/ModData/customize_item_data/mods/"
-
-#REMOVE AFTER SUCCESSFULL TESTS
-
-ENABLED_MODS_PATH = os.path.expanduser("~/testy/enabled")
-CSV_PATH = os.path.expanduser("~/testy/csv")
-DISABLED_MODS_PATH= os.path.expanduser("~/testy/disabled")
+DISABLED_MODS_PATH= os.path.expanduser("~/.config/TekkenModManager/Disabled/")

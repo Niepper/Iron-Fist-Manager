@@ -1,4 +1,6 @@
 import os
+import shutil
+
 from helper.steam import ENABLED_MODS_PATH, DISABLED_MODS_PATH
 from helper.mods import File
 
@@ -33,11 +35,24 @@ def understandOption(option: str):
     return final
 
 
-def moveMod(option, modList, is_enable=True):
-    if is_enable:
+def moveMod(option, modList, isEnable=True):
+    if isEnable:
         pathFrom, pathTo = DISABLED_MODS_PATH, ENABLED_MODS_PATH
     else:
-        pathFrom, pathTO = ENABLED_MODS_PATH, DISABLED_MODS_PATH
+        pathFrom, pathTo = ENABLED_MODS_PATH, DISABLED_MODS_PATH
     parsedOption = understandOption(option)
 
-    print(parsedOption)
+    for i in parsedOption:
+        tempPathFrom = f'{pathFrom}/{modList[i - 1].path}/{modList[i - 1].name}'
+        tempPathTo = f'{pathTo}/{modList[i - 1].path}/{modList[i - 1].name}'
+        try:
+            shutil.move(tempPathFrom, tempPathTo)
+        except FileNotFoundError:
+            os.makedirs(f'{pathTo}/{modList[i - 1].path}/')
+            shutil.move(tempPathFrom, tempPathTo)
+
+
+
+
+def addMod():
+    pass

@@ -13,6 +13,12 @@ def getOptions():
         return js.load(file)
 
 
+def wrongAnswer():
+    print("Given Incorrect value. Try again")
+    sleep(2)
+    os.system("clear")
+
+
 def init():
     console = Console()
     os.system("clear")
@@ -24,15 +30,16 @@ def init():
         console.print(f'[bold]Which one do you want to select [1-{len(options)}][/bold]:', end="")
 
         a = input(" ")
-        if int(a) not in range(1, len(options) + 1):
-            print("Źle")
-            sleep(2)
-            os.system("clear")
-        else:
-            return options[int(a) - 1]["function"]
+        try:
+            if int(a) not in range(1, len(options) + 1):
+                wrongAnswer()
+            else:
+                return options[int(a) - 1]["function"]
+        except ValueError:
+            wrongAnswer()
 
 
-def generateModTable(file: list, do_input=False, name = "Active"):
+def generateModTable(file: list, do_input=False, name="Active"):
     table = Table(title=f"Tekken 7 {name} Mods", row_styles=["", "dim"])
     table.add_column("Id", justify="center", no_wrap=True)
     table.add_column("Name", justify="left")

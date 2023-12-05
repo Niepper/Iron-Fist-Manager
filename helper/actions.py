@@ -1,7 +1,7 @@
 from os import walk
 from helper.display import *
 from rich import print
-from helper.steam import DISABLED_MODS_PATH
+from helper.steam import DISABLED_MODS_PATH, ENABLED_MODS_PATH
 from helper.dir_handler import getMods, moveMod
 
 
@@ -31,4 +31,6 @@ def enableMods():
 
 
 def disableMods():
-    pass
+    modList = getMods(ENABLED_MODS_PATH)
+    options = generateModTable(modList, True, "Active")
+    moveMod(options, modList, False)
