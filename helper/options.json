@@ -16,6 +16,10 @@
   "id": 4,
   "name": "Disable Mods",
   "function": "disableMods"
+},{
+  "id": 5,
+  "name": "Launch Game",
+  "function": "launchGame"
 }
 
 

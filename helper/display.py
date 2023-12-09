@@ -56,3 +56,4 @@ def generateModTable(file: list, do_input=False, name="Active"):
             end="")
         a = input("")
         return a
+

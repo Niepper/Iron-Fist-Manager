@@ -1,3 +1,4 @@
+import subprocess
 from os import walk
 from helper.display import *
 from rich import print
@@ -34,3 +35,8 @@ def disableMods():
     modList = getMods(ENABLED_MODS_PATH)
     options = generateModTable(modList, True, "Active")
     moveMod(options, modList, False)
+
+
+def launchGame():
+    command = "steam steam://run/389730 &"
+    subprocess.run(command, shell=True, stdout=subprocess.DEVNULL)
