@@ -1,7 +1,8 @@
 import os
 import shutil
+import pathlib
 
-from helper.steam import ENABLED_MODS_PATH, DISABLED_MODS_PATH
+from helper.steam import ENABLED_MODS_PATH, DISABLED_MODS_PATH, TEMP_PATH
 from helper.mods import File
 
 
@@ -35,11 +36,15 @@ def understandOption(option: str):
     return final
 
 
-def moveMod(option, modList, isEnable=True):
+def changeModState(option, modList, isEnable=True, isAdd=False, isCSV=False):
     if isEnable:
         pathFrom, pathTo = DISABLED_MODS_PATH, ENABLED_MODS_PATH
-    else:
+    elif not isAdd:
         pathFrom, pathTo = ENABLED_MODS_PATH, DISABLED_MODS_PATH
+
+    if isAdd:
+        pathFrom, pathTo = TEMP_PATH, ENABLED_MODS_PATH
+
     parsedOption = understandOption(option)
 
     for i in parsedOption:
@@ -52,7 +57,26 @@ def moveMod(option, modList, isEnable=True):
             shutil.move(tempPathFrom, tempPathTo)
 
 
+def unpackOnly(ArchivePath, ExtractPath):
+    ExtractPath = pathlib.Path(ExtractPath)
+    shutil.unpack_archive(ArchivePath, ExtractPath)
+
+    for file_path in ExtractPath.rglob('*'):
+        if file_path.is_file() and file_path.suffix.lower() not in {'.pak', '.csv'}:
+            file_path.unlink()
 
 
-def addMod():
-    pass
+def unpackMod(mods: list):
+    mods = list(map(lambda a: pathlib.Path(a).absolute(), mods))
+
+    pakQueue = []
+    archiveQueue = []
+
+    for i in mods:
+        if i.suffix.lower() in [".zip", ".rar"]:
+            shutil.unpack_archive(i, TEMP_PATH)
+            unpackOnly(i, TEMP_PATH)
+        elif i.suffix.lower() == ".pak":
+            shutil.move(i, TEMP_PATH + i.name)
+        else:
+            pass
