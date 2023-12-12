@@ -97,13 +97,13 @@ def exitProgram():
 
 def switchGame():
     try:
-        temp = ""
         with open(Path("./configs/gamesList.json"), "r+") as file:
             temp = js.load(file)
             temp["currentlySelected"] = 0 if temp["currentlySelected"] == 1 else 1
             file.seek(0)
             js.dump(temp, file, indent=4)
             file.truncate()
-        successMessage("Successfully switched from " + temp["games"][temp["currentlySelected"]]["name"] + " to " + temp["games"][1 if temp["currentlySelected"] == 0 else 0]["name"])
+        successMessage("Successfully switched from " + temp["games"][temp["currentlySelected"]]["name"] + " to " +
+                       temp["games"][1 if temp["currentlySelected"] == 0 else 0]["name"])
     except Exception as e:
         failMessage(e)

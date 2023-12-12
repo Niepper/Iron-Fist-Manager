@@ -1,9 +1,9 @@
 import os
-import shutil
 import pathlib
+import shutil
 
+from helper.file import File
 from helper.steam import ENABLED_MODS_PATH, DISABLED_MODS_PATH, TEMP_PATH
-from helper.mods import File
 
 
 def getMods(path=ENABLED_MODS_PATH):
@@ -17,7 +17,7 @@ def getMods(path=ENABLED_MODS_PATH):
     return files_list
 
 
-def understandOption(option: str):
+def parseOptions(option: str):
     final = []
     temp = option.split(",")
     for i in temp:
@@ -45,7 +45,7 @@ def changeModState(option, modList, isEnable=True, isAdd=False, isCSV=False):
     if isAdd:
         pathFrom, pathTo = TEMP_PATH, ENABLED_MODS_PATH
 
-    parsedOption = understandOption(option)
+    parsedOption = parseOptions(option)
 
     for i in parsedOption:
         tempPathFrom = f'{pathFrom}/{modList[i - 1].path}/{modList[i - 1].name}'
@@ -69,9 +69,6 @@ def unpackOnly(ArchivePath, ExtractPath):
 def unpackMod(mods: list):
     mods = list(map(lambda a: pathlib.Path(a).absolute(), mods))
 
-    pakQueue = []
-    archiveQueue = []
-
     for i in mods:
         if i.suffix.lower() in [".zip", ".rar"]:
             shutil.unpack_archive(i, TEMP_PATH)
@@ -83,10 +80,8 @@ def unpackMod(mods: list):
 
 
 def uninstallMod(option, modList):
-    parsedOption = understandOption(option)
+    parsedOption = parseOptions(option)
 
     for i in parsedOption:
         tempPath = f'{DISABLED_MODS_PATH}/{modList[i - 1].path}/{modList[i - 1].name}'
         os.remove(tempPath)
-
-

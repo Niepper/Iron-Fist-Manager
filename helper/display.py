@@ -1,13 +1,14 @@
+import json as js
 import os
 import re
 from pathlib import Path
 from time import sleep
-from rich.table import Table
+
 from rich import print
 from rich.console import Console
-import json as js
+from rich.table import Table
 
-from helper.dir_handler import understandOption
+from helper.dir_handler import parseOptions
 from helper.steam import SELECTED_GAME
 
 
@@ -15,9 +16,6 @@ def getOptions():
     jsonPath = Path("./configs/options.json")
     with open(jsonPath) as file:
         return js.load(file)
-
-
-
 
 
 def wrongAnswer():
@@ -67,9 +65,9 @@ def generateModTable(file: list, do_input=False, name="Active Mods"):
         return a
 
 
-def successMessage(message, options = None, modlist = None):
+def successMessage(message, options=None, modlist=None):
     if options:
-        options = understandOption(options)
+        options = parseOptions(options)
         effectedMods = []
         for i in options:
             effectedMods.append(modlist[i - 1].name)

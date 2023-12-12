@@ -5,32 +5,38 @@
     "function": "displayEnabledMods"
   },
   {
-  "id": 2,
-  "name": "Display Inactive Mods",
-  "function": "displayDisabledMods"
-},{
-  "id": 3,
-  "name": "Enable Mods",
-  "function": "enableMods"
-},{
-  "id": 4,
-  "name": "Disable Mods",
-  "function": "disableMods"
-},{
-  "id": 5,
-  "name": "Remove disabled mods",
-  "function": "removeMods"
-},{
-  "id": 6,
-  "name": "Launch Game",
-  "function": "launchGame"
-},{
+    "id": 2,
+    "name": "Display Inactive Mods",
+    "function": "displayDisabledMods"
+  },
+  {
+    "id": 3,
+    "name": "Enable Mods",
+    "function": "enableMods"
+  },
+  {
+    "id": 4,
+    "name": "Disable Mods",
+    "function": "disableMods"
+  },
+  {
+    "id": 5,
+    "name": "Remove disabled mods",
+    "function": "removeMods"
+  },
+  {
+    "id": 6,
+    "name": "Launch Game",
+    "function": "launchGame"
+  },
+  {
     "id": 7,
     "name": "Switch Game",
     "function": "switchGame"
-},{
-  "id": 8,
-  "name": "Exit",
-  "function": "exitProgram"
-}
+  },
+  {
+    "id": 8,
+    "name": "Exit",
+    "function": "exitProgram"
+  }
 ]

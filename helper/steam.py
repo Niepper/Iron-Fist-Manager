@@ -1,6 +1,6 @@
+import json as js
 import os
 from pathlib import Path
-import json as js
 
 
 def getGame():
@@ -11,11 +11,10 @@ def getGame():
 
 currGame = getGame()
 
-
 SELECTED_GAME = currGame["games"][currGame["currentlySelected"]]
 
 
-def get_steam_game_location():
+def getSteamGameLocation():
     steamLinuxRoot = os.path.expanduser("~/.steam/steam")
     libraryFolders = [steamLinuxRoot]
     gameId = SELECTED_GAME["id"]
@@ -39,7 +38,7 @@ def get_steam_game_location():
 
 
 print(SELECTED_GAME)
-GamePath = get_steam_game_location()
+GamePath = getSteamGameLocation()
 ENABLED_MODS_PATH = GamePath + SELECTED_GAME["contentPath"] + "/Paks/~mods/"
 CSV_PATH = GamePath + SELECTED_GAME["contentPath"] + "/ModData/customize_item_data/mods/"
 DISABLED_MODS_PATH = os.path.expanduser("~/.config/TekkenModManager/Disabled/")
