@@ -18,6 +18,12 @@
   "function": "disableMods"
 },{
   "id": 5,
+  "name": "Remove disabled mods",
+  "function": "removeMods"
+},
+
+  {
+  "id": 6,
   "name": "Launch Game",
   "function": "launchGame"
 }

@@ -80,3 +80,12 @@ def unpackMod(mods: list):
             shutil.move(i, TEMP_PATH + i.name)
         else:
             pass
+
+
+def uninstallMod(option, modList):
+    parsedOption = understandOption(option)
+
+    # Remove mod of id of parsedOption from modlist
+    for i in parsedOption:
+        tempPath = f'{DISABLED_MODS_PATH}/{modList[i - 1].path}/{modList[i - 1].name}'
+        os.remove(tempPath)

@@ -5,7 +5,7 @@ from os import walk
 from helper.display import *
 from rich import print
 from helper.steam import DISABLED_MODS_PATH, ENABLED_MODS_PATH, TEMP_PATH
-from helper.dir_handler import getMods, changeModState, unpackMod
+from helper.dir_handler import getMods, changeModState, unpackMod, uninstallMod
 
 
 def runFunctionFromJson(function):
@@ -55,7 +55,7 @@ def addMod(mods: list):
     shutil.rmtree(TEMP_PATH)
 
 
-def removeMod():
+def removeMods():
     modList = getMods(DISABLED_MODS_PATH)
-    options = generateModTable(modList, True, "Active")
-    removeMod(options, modList)
+    options = generateModTable(modList, True, "Inactive")
+    uninstallMod(options, modList)
