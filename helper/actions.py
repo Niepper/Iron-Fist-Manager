@@ -103,7 +103,7 @@ def switchGame():
             file.seek(0)
             js.dump(temp, file, indent=4)
             file.truncate()
-        successMessage("Successfully switched from " + temp["games"][temp["currentlySelected"]]["name"] + " to " +
-                       temp["games"][1 if temp["currentlySelected"] == 0 else 0]["name"])
+        successMessage("Successfully switched from " + temp["games"][0 if temp["currentlySelected"] == 1 else 1]["name"] + " to " +
+                       temp["games"][temp["currentlySelected"]]["name"])
     except Exception as e:
         failMessage(e)

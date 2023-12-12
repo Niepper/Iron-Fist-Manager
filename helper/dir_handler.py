@@ -57,11 +57,11 @@ def changeModState(option, modList, isEnable=True, isAdd=False, isCSV=False):
             shutil.move(tempPathFrom, tempPathTo)
 
 
-def unpackOnly(ArchivePath, ExtractPath):
-    ExtractPath = pathlib.Path(ExtractPath)
-    shutil.unpack_archive(ArchivePath, ExtractPath)
+def unpackOnly(archivePath, extractPath):
+    extractPath = pathlib.Path(extractPath)
+    shutil.unpack_archive(archivePath, extractPath)
 
-    for file_path in ExtractPath.rglob('*'):
+    for file_path in extractPath.rglob('*'):
         if file_path.is_file() and file_path.suffix.lower() not in {'.pak', '.csv'}:
             file_path.unlink()
 

@@ -29,8 +29,8 @@ def init():
     os.system("clear")
     while True:
         options = getOptions()
-        console.print(f'[bold]Niepper\'s Iron Fist Manager [/bold]')
-        console.print(f'[yellow] Currently Selected Game: {SELECTED_GAME["name"]} [/yellow]')
+        console.print(f'[bold]Iron Fist Manager [/bold]')
+        console.print(f'[bold gray] Currently Selected Game: {SELECTED_GAME["name"]} [/bold gray]')
         for i in options:
             console.print(f'[bold yellow]{i["id"]}.[/bold yellow][bold] {i["name"]} [/bold]')
 
