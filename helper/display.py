@@ -1,10 +1,14 @@
 import os
+import re
 from pathlib import Path
 from time import sleep
 from rich.table import Table
 from rich import print
 from rich.console import Console
 import json as js
+
+from helper.dir_handler import understandOption
+from helper.steam import SELECTEDGAME
 
 
 def getOptions():
@@ -39,8 +43,8 @@ def init():
             wrongAnswer()
 
 
-def generateModTable(file: list, do_input=False, name="Active"):
-    table = Table(title=f"Tekken 7 {name} Mods", row_styles=["", "dim"])
+def generateModTable(file: list, do_input=False, name="Active Mods"):
+    table = Table(title=f'{SELECTEDGAME["name"]} {name}', row_styles=["", "dim"])
     table.add_column("Id", justify="center", no_wrap=True)
     table.add_column("Name", justify="left")
     table.add_column("Path", justify="right")
@@ -57,3 +61,19 @@ def generateModTable(file: list, do_input=False, name="Active"):
         a = input("")
         return a
 
+
+def successMessage(options, modlist, message):
+    options = understandOption(options)
+    effectedMods = []
+    for i in options:
+        effectedMods.append(modlist[i - 1].name)
+
+    modified_extensions = ', '.join([re.sub(r'\.\w+\b', '', ext) for ext in effectedMods])
+
+    print(f"[bold green]Successfully {message} {modified_extensions}[/bold green]")
+    sleep(2)
+
+
+def failMessage(message):
+    print(f"[bold red]{message}[/bold red]")
+    sleep(2)

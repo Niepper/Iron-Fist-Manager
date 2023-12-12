@@ -29,4 +29,4 @@ ENABLED_MODS_PATH = GamePath + "/steamapps/common/TEKKEN 7/TekkenGame/Content/Pa
 CSV_PATH = GamePath + "/steamapps/common/TEKKEN 7/TekkenGame/Content/ModData/customize_item_data/mods/"
 DISABLED_MODS_PATH = os.path.expanduser("~/.config/TekkenModManager/Disabled/")
 TEMP_PATH = "/tmp/"
-
+SELECTEDGAME = {"id": "389730", "name": "Tekken 7"}
