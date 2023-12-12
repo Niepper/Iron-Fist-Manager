@@ -8,13 +8,16 @@ from rich.console import Console
 import json as js
 
 from helper.dir_handler import understandOption
-from helper.steam import SELECTEDGAME
+from helper.steam import SELECTED_GAME
 
 
 def getOptions():
-    jsonPath = Path("./helper/options.json")
+    jsonPath = Path("./configs/options.json")
     with open(jsonPath) as file:
         return js.load(file)
+
+
+
 
 
 def wrongAnswer():
@@ -28,6 +31,8 @@ def init():
     os.system("clear")
     while True:
         options = getOptions()
+        console.print(f'[bold]Niepper\'s Iron Fist Manager [/bold]')
+        console.print(f'[yellow] Currently Selected Game: {SELECTED_GAME["name"]} [/yellow]')
         for i in options:
             console.print(f'[bold yellow]{i["id"]}.[/bold yellow][bold] {i["name"]} [/bold]')
 
@@ -44,7 +49,7 @@ def init():
 
 
 def generateModTable(file: list, do_input=False, name="Active Mods"):
-    table = Table(title=f'{SELECTEDGAME["name"]} {name}', row_styles=["", "dim"])
+    table = Table(title=f'{SELECTED_GAME["name"]} {name}', row_styles=["", "dim"])
     table.add_column("Id", justify="center", no_wrap=True)
     table.add_column("Name", justify="left")
     table.add_column("Path", justify="right")
@@ -62,15 +67,17 @@ def generateModTable(file: list, do_input=False, name="Active Mods"):
         return a
 
 
-def successMessage(options, modlist, message):
-    options = understandOption(options)
-    effectedMods = []
-    for i in options:
-        effectedMods.append(modlist[i - 1].name)
+def successMessage(message, options = None, modlist = None):
+    if options:
+        options = understandOption(options)
+        effectedMods = []
+        for i in options:
+            effectedMods.append(modlist[i - 1].name)
 
-    modified_extensions = ', '.join([re.sub(r'\.\w+\b', '', ext) for ext in effectedMods])
+        modified_extensions = ', '.join([re.sub(r'\.\w+\b', '', ext) for ext in effectedMods])
 
-    print(f"[bold green]Successfully {message} {modified_extensions}[/bold green]")
+        print(f"[bold green]Successfully {message} mods: {modified_extensions}[/bold green]")
+    print(f"[bold green]{message}[/bold green]")
     sleep(2)
 
 

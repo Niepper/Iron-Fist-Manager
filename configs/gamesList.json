@@ -1,0 +1,16 @@
+{
+    "currentlySelected": 1,
+    "games": [
+        {
+            "id": "389730",
+            "name": "Tekken 7",
+            "contentPath": "/steamapps/common/TEKKEN 7/TekkenGame/Content"
+        },
+        {
+            "id": "389730",
+            "_comment": "Game still isn't out so i put the same id",
+            "name": "Tekken 8",
+            "contentPath": "/steamapps/common/TEKKEN 8/TekkenGame/Content"
+        }
+    ]
+}

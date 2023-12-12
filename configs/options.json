@@ -20,13 +20,17 @@
   "id": 5,
   "name": "Remove disabled mods",
   "function": "removeMods"
-},
-
-  {
+},{
   "id": 6,
   "name": "Launch Game",
   "function": "launchGame"
+},{
+    "id": 7,
+    "name": "Switch Game",
+    "function": "switchGame"
+},{
+  "id": 8,
+  "name": "Exit",
+  "function": "exitProgram"
 }
-
-
 ]

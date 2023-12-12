@@ -1,32 +1,46 @@
 import os
+from pathlib import Path
+import json as js
+
+
+def getGame():
+    jsonPath = Path("./configs/gamesList.json")
+    with open(jsonPath) as file:
+        return js.load(file)
+
+
+currGame = getGame()
+
+
+SELECTED_GAME = currGame["games"][currGame["currentlySelected"]]
 
 
 def get_steam_game_location():
-    steam_root = os.path.expanduser("~/.steam/steam")
-    library_folders = [steam_root]
-    game_id = 389730
+    steamLinuxRoot = os.path.expanduser("~/.steam/steam")
+    libraryFolders = [steamLinuxRoot]
+    gameId = SELECTED_GAME["id"]
     # Check if the Steam library folders file exists
-    library_folders_file = os.path.join(steam_root, "steamapps/libraryfolders.vdf")
-    if os.path.isfile(library_folders_file):
-        with open(library_folders_file, "r") as f:
+    libraryFoldersName = os.path.join(steamLinuxRoot, "steamapps/libraryfolders.vdf")
+    if os.path.isfile(libraryFoldersName):
+        with open(libraryFoldersName, "r") as f:
             for line in f:
                 line = line.strip()
                 if line.startswith('"path"'):
                     folder_path = line.split('"')[3].replace("\\\\", "/")
-                    library_folders.append(os.path.expanduser(folder_path))
+                    libraryFolders.append(os.path.expanduser(folder_path))
 
     # Search for the game manifest file
-    for library_folder in library_folders:
-        manifest_file = os.path.join(library_folder, "steamapps", "appmanifest_{}.acf".format(game_id))
-        if os.path.isfile(manifest_file):
-            return library_folder
+    for libraryFolder in libraryFolders:
+        manifestFile = os.path.join(libraryFolder, "steamapps", "appmanifest_{}.acf".format(gameId))
+        if os.path.isfile(manifestFile):
+            return libraryFolder
 
     return None
 
 
+print(SELECTED_GAME)
 GamePath = get_steam_game_location()
-ENABLED_MODS_PATH = GamePath + "/steamapps/common/TEKKEN 7/TekkenGame/Content/Paks/~mods/"
-CSV_PATH = GamePath + "/steamapps/common/TEKKEN 7/TekkenGame/Content/ModData/customize_item_data/mods/"
+ENABLED_MODS_PATH = GamePath + SELECTED_GAME["contentPath"] + "/Paks/~mods/"
+CSV_PATH = GamePath + SELECTED_GAME["contentPath"] + "/ModData/customize_item_data/mods/"
 DISABLED_MODS_PATH = os.path.expanduser("~/.config/TekkenModManager/Disabled/")
 TEMP_PATH = "/tmp/"
-SELECTEDGAME = {"id": "389730", "name": "Tekken 7"}

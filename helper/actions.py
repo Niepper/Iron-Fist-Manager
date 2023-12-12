@@ -1,11 +1,15 @@
 import shutil
 import subprocess
 
-from rich import print
-
 from helper.dir_handler import getMods, changeModState, unpackMod, uninstallMod
 from helper.display import *
-from helper.steam import DISABLED_MODS_PATH, ENABLED_MODS_PATH, TEMP_PATH, SELECTEDGAME
+from helper.steam import DISABLED_MODS_PATH, TEMP_PATH, SELECTED_GAME
+
+
+def getGame():
+    jsonPath = Path("./configs/gamesList.json")
+    with open(jsonPath) as file:
+        return js.load(file)
 
 
 def runFunctionFromJson(function):
@@ -38,7 +42,7 @@ def enableMods():
         modList = getMods(DISABLED_MODS_PATH)
         options = generateModTable(modList, True, "Inactive Mods")
         changeModState(options, modList)
-        successMessage(options, modList, "enabled")
+        successMessage("enabled", options, modList)
     except Exception as e:
         failMessage(e)
 
@@ -48,14 +52,14 @@ def disableMods():
         modList = getMods()
         options = generateModTable(modList, True)
         changeModState(options, modList, False)
-        successMessage(options, modList, "disabled")
+        successMessage("disabled", options, modList)
     except Exception as e:
         failMessage(e)
 
 
 def launchGame():
     try:
-        command = f'steam steam://run/{SELECTEDGAME["id"]} &'
+        command = f'steam steam://run/{SELECTED_GAME["id"]} &'
         subprocess.run(command, shell=True, stdout=subprocess.DEVNULL)
     except Exception as e:
         failMessage(e)
@@ -71,7 +75,7 @@ def addMod(mods: list):
         options = generateModTable(modList, True, "Mods To Add")
         changeModState(options, modList, isAdd=True)
         shutil.rmtree(TEMP_PATH)
-        successMessage(options, modList, "added")
+        successMessage("added", options, modList)
     except Exception as e:
         failMessage(e)
 
@@ -82,5 +86,24 @@ def removeMods():
         options = generateModTable(modList, True, "Inactive Mods")
         uninstallMod(options, modList)
         successMessage(options, modList, "removed")
+    except Exception as e:
+        failMessage(e)
+
+
+def exitProgram():
+    print("[bold darkred]Exitting...[/bold darkred]")
+    exit(0)
+
+
+def switchGame():
+    try:
+        temp = ""
+        with open(Path("./configs/gamesList.json"), "r+") as file:
+            temp = js.load(file)
+            temp["currentlySelected"] = 0 if temp["currentlySelected"] == 1 else 1
+            file.seek(0)
+            js.dump(temp, file, indent=4)
+            file.truncate()
+        successMessage("Successfully switched from " + temp["games"][temp["currentlySelected"]]["name"] + " to " + temp["games"][1 if temp["currentlySelected"] == 0 else 0]["name"])
     except Exception as e:
         failMessage(e)
