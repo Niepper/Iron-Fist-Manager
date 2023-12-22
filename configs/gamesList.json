@@ -1,5 +1,5 @@
 {
-    "currentlySelected": 0,
+    "currentlySelected": 1,
     "games": [
         {
             "id": "389730",
@@ -7,10 +7,10 @@
             "contentPath": "/steamapps/common/TEKKEN 7/TekkenGame/Content"
         },
         {
-            "id": "389730",
+            "id": "2524440",
             "comment": "Game still isn't out so i put the same id",
-            "name": "Tekken 8",
-            "contentPath": "/steamapps/common/TEKKEN 8/TekkenGame/Content"
+            "name": "Tekken 8 Demo",
+            "contentPath": "/steamapps/common/TEKKEN 8 Demo/Polaris/Content/"
         }
     ]
 }

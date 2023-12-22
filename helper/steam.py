@@ -42,4 +42,4 @@ GamePath = getSteamGameLocation()
 ENABLED_MODS_PATH = GamePath + SELECTED_GAME["contentPath"] + "/Paks/~mods/"
 CSV_PATH = GamePath + SELECTED_GAME["contentPath"] + "/ModData/customize_item_data/mods/"
 DISABLED_MODS_PATH = os.path.expanduser("~/.config/TekkenModManager/Disabled/")
-TEMP_PATH = "/tmp/"
+TEMP_PATH = "/tmp/ironfist/"

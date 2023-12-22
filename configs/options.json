@@ -31,6 +31,11 @@
   },
   {
     "id": 7,
+    "name": "Switch Game",
+    "function": "switchGame"
+  },
+  {
+    "id": 8,
     "name": "Exit",
     "function": "exitProgram"
   }
