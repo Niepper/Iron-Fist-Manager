@@ -4,7 +4,7 @@ from pathlib import Path
 
 
 def getGame():
-    jsonPath = Path("./configs/gamesList.json")
+    jsonPath = Path("~/.config/ironFist/gamesList.json").expanduser()
     with open(jsonPath) as file:
         return js.load(file)
 
@@ -41,5 +41,5 @@ print(SELECTED_GAME)
 GamePath = getSteamGameLocation()
 ENABLED_MODS_PATH = GamePath + SELECTED_GAME["contentPath"] + "/Paks/~mods/"
 CSV_PATH = GamePath + SELECTED_GAME["contentPath"] + "/ModData/customize_item_data/mods/"
-DISABLED_MODS_PATH = os.path.expanduser("~/.config/TekkenModManager/Disabled/")
+DISABLED_MODS_PATH = os.path.expanduser("~/.config/ironFist/"+ SELECTED_GAME["name"]+"/Disabled/")
 TEMP_PATH = "/tmp/ironfist/"

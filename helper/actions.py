@@ -97,7 +97,7 @@ def exitProgram():
 
 def switchGame():
     try:
-        with open(Path("./configs/gamesList.json"), "r+") as file:
+        with open(Path("~/.config/ironFist/gamesList.json").expanduser(), "r+") as file:
             temp = js.load(file)
             temp["currentlySelected"] = 0 if temp["currentlySelected"] == 1 else 1
             file.seek(0)

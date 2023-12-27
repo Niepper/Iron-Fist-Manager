@@ -75,7 +75,7 @@ def unpackMod(mods: list):
     mods = list(map(lambda a: pathlib.Path(a).absolute(), mods))
 
     for i in mods:
-        if i.suffix.lower() in [".zip", ".rar"]:
+        if i.suffix.lower() in [".zip", ".rar", ".7z"]:
             shutil.unpack_archive(i, TEMP_PATH)
             unpackOnly(i, TEMP_PATH)
         elif i.suffix.lower() == [".pak", ".csv"]:

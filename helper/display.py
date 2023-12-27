@@ -13,7 +13,7 @@ from helper.steam import SELECTED_GAME
 
 
 def getOptions():
-    jsonPath = Path("./configs/options.json")
+    jsonPath = Path("~/.config/ironFist/options.json").expanduser()
     with open(jsonPath) as file:
         return js.load(file)
 
@@ -56,7 +56,7 @@ def generateModTable(file: list, do_input=False, name="Active Mods"):
         table.add_row(str(filer.id + 1) + ".", filer.name, filer.path)
 
     print(table)
-
+    input(" Press enter to continue...")
     if do_input:
         print(
             f"[bold yellow] Which one you want to select [1-{len(table.rows)}][/bold yellow] [bold](eg. 1-5; 1,2,3,4,5; !4): [/bold]",
