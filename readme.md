@@ -7,5 +7,5 @@
 
 ### Installation
 - Download the latest release from [here](https://github.com/Niepper/IFM/releases/download/stable/IronFistManager)
-- run `chmod +x IronFistManager` to make the file executable
+- run `chmod +x IronFistManager`
 - run `./IronFistManager` in your terminal
